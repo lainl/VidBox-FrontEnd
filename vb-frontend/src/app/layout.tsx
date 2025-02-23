@@ -25,6 +25,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <div className="container">
+          {/* Temporary layout*/}
+          <h1 id="start">Vid-Box</h1> {/*Placeholder Logo*/}
+          <input type="text" id="search-bar" placeholder="Search"></input> {/*Non-fuctional search bar*/}
+          <h1 id="end">profile pic</h1> {/*Placeholder Profile Pic*/}
+        </div>
+        
         {children}
       </body>
     </html>
