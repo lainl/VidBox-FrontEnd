@@ -60,13 +60,13 @@ a {
 }
 
 .video{
-  background-color: lightblue;
+  background-color: gray;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2em;
   border-radius: 8px;
-  max-width: 300px;
+  max-width: 400px;
   aspect-ratio: 2 / 1;
 }
 
