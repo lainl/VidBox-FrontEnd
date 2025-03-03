@@ -38,6 +38,7 @@ export default function RootLayout({
           <Link className="nav-bar-item" href="/">Home</Link>
           <Link className="nav-bar-item" href="/Profile">Profile</Link>
           <Link className="nav-bar-item" href="/Upload">Upload</Link>
+          <Link className="nav-bar-item" href="/Login">Login</Link>
           </div>
 
           <div className="column">
