@@ -14,9 +14,9 @@ export default function profile() {
                 <label htmlFor="Username">Username:</label>
                 <input type="text" id="usernameInput" name="username" />
                 <label htmlFor="Password">Password:</label>
-                <input type="text" id="passwordInput" name="password" />
+                <input type="password" id="passwordInput" name="password" />
                 <label htmlFor="PasswordV">Re-Enter Password:</label>
-                <input type="text" id="passwordInputV" name="passwordV" />
+                <input type="password" id="passwordInputV" name="passwordV" />
                 <button type="submit">Signup!</button>
             </form>
         </div>
