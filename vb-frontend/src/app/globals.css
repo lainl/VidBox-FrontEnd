@@ -127,9 +127,14 @@ a {
   text-align: center;
 }
 
+.upload-page{
+  text-align: center;
+  margin-right: 10%;
+  display: flex;
+  flex-direction: column;
+}
 
-
-.upload-button{
+#upload-button{
   background-color: #aaacab;
   padding: 16px 32px;
   font-size: 18px;
@@ -137,6 +142,11 @@ a {
   border-radius: 8px;
   cursor: pointer;
   margin-top: 5px;
+  margin-left: 5px;
+}
+
+#upload-button:active{
+  background-color: #797a7a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -145,7 +155,7 @@ a {
   }
 }
 
-form {
+.loginForm {
   display: flex;
   flex-direction: column;
   max-width: 300px;

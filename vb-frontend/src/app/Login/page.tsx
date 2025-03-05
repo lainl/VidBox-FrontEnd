@@ -76,7 +76,7 @@ export default function LoginPage()
     <>
       <div> <h2>Login Page</h2> </div>
       <div>
-        <form id="LoginForm" onSubmit={handleSubmit}>
+        <form id="LoginForm" className="loginForm"onSubmit={handleSubmit}>
           <h2>Login!</h2>
 
           <label htmlFor="Username">Username:</label>
