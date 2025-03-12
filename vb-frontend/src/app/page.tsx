@@ -6,77 +6,55 @@ import Link from "next/link";
 const API_BASE_URL = 'https://vidbox-backend-7u1k.onrender.com/';
 
 interface Video {
-  id: number;
+  _id: string;
   title: string;
-  duration: string;
-  postDate: string;
-  videoURL: string;
+  googleDriveLink: string;
+  userID: string;
+  postTime: string;
 }
 
-const VideoCard: React.FC<Video> = ({ id, title, duration, postDate, videoURL }) => {
-  return (
-    <div>
-      <div className="video">
-        <img src="vercel.svg" alt="Thumbnail" width="50%" />
-      </div>
-      <div>
-        <h3>{title}</h3>
-        <h4>{duration} : {postDate}</h4>
-      </div>
-    </div>
-  );
-};
+const videoIds = ['67cc2a5ba3511970b4566ff4', '67c9d72e7996e024548e6652', '67cc2d15a3511970b4566ff6']
 
 export default function Home() {
+
   const [videos, setVideos] = useState<Video[]>([]);
-
-  const videoLinkRef = useRef<HTMLAnchorElement | null>(null);
-
-  const handleVideoClicked = () =>
-    {
-      videoLinkRef.current?.click();
-    }
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    const fetchedVideos = [
-      { id: 1, title: "Video 1", duration: "5:00", postDate: "1 day ago", videoURL: "video1.mp4" },
-      { id: 2, title: "Video 2", duration: "10:43", postDate: "12 hours ago", videoURL: "video2.mp4" },
-      { id: 3, title: "Video 3", duration: "1:05:03", postDate: " 01/12/23", videoURL: "video3.mp4" },
-      { id: 4, title: "Video 4", duration: "05:59", postDate: " 01/13/25", videoURL: "video4.mp4" },
-      { id: 5, title: "Video 4", duration: "05:59", postDate: " 01/13/25", videoURL: "video4.mp4" },
-      { id: 6, title: "Video 1", duration: "5:00", postDate: "1 day ago", videoURL: "video1.mp4" },
-      { id: 7, title: "Video 2", duration: "10:43", postDate: "12 hours ago", videoURL: "video2.mp4" },
-      { id: 8, title: "Video 3", duration: "1:05:03", postDate: " 01/12/23", videoURL: "video3.mp4" },
-      { id: 9, title: "Testing Really long video title juset because", duration: "05:59", postDate: " 01/13/25", videoURL: "video4.mp4" },
-      { id: 10, title: "Video 4", duration: "05:59", postDate: " 01/13/25", videoURL: "video4.mp4" },
-      { id: 11, title: "Video 1", duration: "5:00", postDate: "1 day ago", videoURL: "video1.mp4" },
-      { id: 12, title: "Video 2", duration: "10:43", postDate: "12 hours ago", videoURL: "video2.mp4" },
-      { id: 13, title: "Video 3", duration: "1:05:03", postDate: " 01/12/23", videoURL: "video3.mp4" },
-      { id: 14, title: "Video 4", duration: "05:59", postDate: " 01/13/25", videoURL: "video4.mp4" },
-      { id: 15, title: "Video 4", duration: "05:59", postDate: " 01/13/25", videoURL: "video4.mp4" },
-    ];
-    setVideos(fetchedVideos);
-    //  const fetchVideos = async () => {
-    //   try {
-    //     const response = await fetch(API_BASE_URL);
-    //     const data = await response.json();
-    //     setVideos(data);
-    //   } catch (error) {
-    //     console.error("Error fetching videos:", error);
-    //   }
-    // };
+    const fetchVideos = async () => {
+      try {
+        const fetchedVideos = await Promise.all(
+          videoIds.map(async (id) => {
+            const response = await fetch(`${API_BASE_URL}video/${id}`);
+            if (!response.ok) {
+              throw new Error(`Video with ID "${id}" not found`);
+            }
+            return await response.json();
+          })
+        );
+        setVideos(fetchedVideos);
+      } catch (error: any) {
+        setErrorMessage(error.message);
+      }
+    };
 
-    // fetchVideos();
+    fetchVideos();
   }, []);
+
+  if (errorMessage) return <div>Error: {errorMessage}</div>
+  if (!videos) return <div>Loading Video...</div>
 
   return (
     <div className="video-grid">
       {videos.map((video) => (
-        <div  key={video.id} style={{cursor: "pointer"}} onClick={handleVideoClicked}>
-        <VideoCard id={video.id} title={video.title} duration={video.duration} postDate={video.postDate} videoURL={video.videoURL} />
-        <a href="/Video" style={{display: "hidden"}} ref={videoLinkRef}></a>
+        <Link href={`/Video/${video._id}`} passHref key={video._id}>
+        <div className="video" style={{ cursor: "pointer", border: "1px solid #ccc", padding: "10px" }}>
+          <img src="/vercel.svg" alt="Thumbnail" width="50%" />
         </div>
-      ))}
+          <h3>{video.title}</h3>
+          <h4>Uploaded: {new Date(video.postTime).toLocaleDateString()}</h4>
+      </Link>
+      ))} 
     </div>
   );
 }

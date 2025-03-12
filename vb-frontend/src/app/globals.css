@@ -70,6 +70,22 @@ a {
   aspect-ratio: 2 / 1;
 }
 
+.video-container {
+  margin: 50px;
+  margin-left: 100px;
+  width: 80%;
+  max-width: 800px;
+}
+
+.display-video video{
+  width: 150%;
+  max-width: 150%;
+}
+
+.display-text {
+  margin-top: 20px;
+}
+
 .row{
   display: flex;
 }

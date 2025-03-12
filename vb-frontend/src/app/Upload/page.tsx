@@ -46,7 +46,7 @@ export default function UploadSection() {
   setMessage("");
 
   try {
-    const response = await fetch(`${API_BASE_URL}/upload`, {
+    const response = await fetch(`${API_BASE_URL}/video/upload`, {
       method: "POST",
       body: formData,
     });
