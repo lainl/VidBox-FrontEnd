@@ -1,4 +1,5 @@
 "use client";
+import { error } from "console";
 import { useRef, useState } from "react";
 
 const API_BASE_URL = 'https://vidbox-backend-7u1k.onrender.com/';
@@ -6,6 +7,7 @@ const API_BASE_URL = 'https://vidbox-backend-7u1k.onrender.com/';
 export default function UploadSection() {
   const [file, setFile] = useState<File | null>(null);
   const [title, setTitle] = useState("");
+  const [userId, setUserId] = useState("");
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -36,11 +38,15 @@ export default function UploadSection() {
       setMessage("Must Include Title");
       return;
     }
+
+    //For Testing
+    setUserId("67b67a0fb4a8e0eedd1aa497");
   
 
   const formData = new FormData();
   formData.append("video", file);
   formData.append("title", title);
+  formData.append("userId", userId);
 
   setUploading(true);
   setMessage("");

@@ -7,7 +7,7 @@ export default function profile() {
             <h2>Signup Page</h2>
         </div>
         <div>
-            <form id="SignupForm">
+            <form id="SignupForm" className="loginForm">
                 <h2> Signup!</h2>
                 <label htmlFor="Email">Email:</label>
                 <input type="text" id="emailInput" name="email" />

@@ -36,7 +36,6 @@ export default function RootLayout({
         <div className="row">
           <div className="nav-bar">
           <Link className="nav-bar-item" href="/">Home</Link>
-          <Link className="nav-bar-item" href="/Profile">Profile</Link>
           <Link className="nav-bar-item" href="/Upload">Upload</Link>
           <Link className="nav-bar-item" href="/Login">Login</Link>
           </div>
